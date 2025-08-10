@@ -33,3 +33,92 @@ def sum_of_evens(nums):
     return total
 
 print(sum_of_evens([1, 2, 3, 4, 5, 6]))  # Output: 12
+
+
+"""
+DAY - 2 : Big-O Notation & Basic Array Operations
+---------------------------------------
+Author: [Your Name]
+Date: [Today's Date]
+
+This file explains:
+1. What Big-O notation is.
+2. How common array operations work.
+3. The time complexity (Big-O) of each operation.
+
+Big-O notation helps us measure how the runtime or memory usage
+of an algorithm grows as the size of the input grows.
+
+We focus on the *worst-case* scenario.
+"""
+
+# Let's use Python lists to represent arrays
+arr = [10, 20, 30, 40, 50]
+
+# ----------------------------------------------------
+# 1. Accessing an element (O(1) - Constant Time)
+# ----------------------------------------------------
+# Accessing any index in an array is O(1) because
+# it takes the same time regardless of the array size.
+print("Access element at index 2:", arr[2])  # Output: 30
+
+# ----------------------------------------------------
+# 2. Searching for an element (O(n) - Linear Time)
+# ----------------------------------------------------
+# In the worst case, we might have to check every element.
+def linear_search(array, target):
+    for i in range(len(array)):
+        if array[i] == target:
+            return i
+    return -1
+
+print("Search for 40:", linear_search(arr, 40))  # Output: 3
+print("Search for 100:", linear_search(arr, 100))  # Output: -1
+
+# ----------------------------------------------------
+# 3. Inserting an element at the end (O(1) - Amortized)
+# ----------------------------------------------------
+# Appending is usually O(1), unless Python needs to
+# resize the underlying list.
+arr.append(60)
+print("After appending 60:", arr)
+
+# ----------------------------------------------------
+# 4. Inserting an element at the beginning (O(n))
+# ----------------------------------------------------
+# Inserting at the start requires shifting all elements.
+arr.insert(0, 5)
+print("After inserting 5 at start:", arr)
+
+# ----------------------------------------------------
+# 5. Deleting an element (O(n))
+# ----------------------------------------------------
+# Deleting from the middle/start requires shifting elements.
+arr.remove(30)  # Removes the first occurrence of 30
+print("After removing 30:", arr)
+
+# ----------------------------------------------------
+# 6. Traversing the array (O(n))
+# ----------------------------------------------------
+# Visiting each element once.
+def traverse(array):
+    for element in array:
+        print(element, end=" ")
+    print()
+
+print("Traversing array:", end=" ")
+traverse(arr)
+
+# ----------------------------------------------------
+# Summary of Time Complexities:
+# ----------------------------------------------------
+# Operation                  Time Complexity
+# -------------------------------------------
+# Access by index            O(1)
+# Search (unsorted)          O(n)
+# Insert at end              O(1) amortized
+# Insert at beginning/middle O(n)
+# Delete by value/index      O(n)
+# Traverse                   O(n)
+# ----------------------------------------------------
+
