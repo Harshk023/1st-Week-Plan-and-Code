@@ -122,3 +122,116 @@ traverse(arr)
 # Traverse                   O(n)
 # ----------------------------------------------------
 
+
+
+
+"""
+DAY 3: Reverse Array, Max/Min Element Problems
+Author: [Your Name]
+Date: [Today's Date]
+
+Topics Covered:
+1. Reverse an array
+2. Find maximum and minimum elements in an array
+3. LeetCode #1920 - Build Array from Permutation
+4. LeetCode #1299 - Replace Elements with Greatest Element on Right Side
+"""
+
+# ----------------------------------------------------
+# 1. Reverse an Array (O(n))
+# ----------------------------------------------------
+# Problem: Given an array, reverse it in-place.
+
+def reverse_array(arr):
+    left, right = 0, len(arr) - 1
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+        right -= 1
+    return arr
+
+arr1 = [1, 2, 3, 4, 5]
+print("Original:", arr1)
+print("Reversed:", reverse_array(arr1))
+
+
+# ----------------------------------------------------
+# 2. Find Maximum and Minimum Elements (O(n))
+# ----------------------------------------------------
+# Problem: Given an array, find the maximum and minimum values.
+
+def find_max_min(arr):
+    max_val = arr[0]
+    min_val = arr[0]
+    for num in arr:
+        if num > max_val:
+            max_val = num
+        if num < min_val:
+            min_val = num
+    return max_val, min_val
+
+arr2 = [12, 4, 19, 33, 7]
+max_val, min_val = find_max_min(arr2)
+print(f"Array: {arr2}")
+print(f"Max: {max_val}, Min: {min_val}")
+
+
+# ----------------------------------------------------
+# 3. LeetCode #1920 - Build Array from Permutation
+# ----------------------------------------------------
+"""
+Problem:
+Given a zero-based permutation nums (0-indexed), build an array ans where:
+ans[i] = nums[nums[i]] for each 0 <= i < nums.length
+and return it.
+
+Example:
+Input: nums = [0,2,1,5,3,4]
+Output: [0,1,2,4,5,3]
+"""
+
+def build_array(nums):
+    return [nums[nums[i]] for i in range(len(nums))]
+
+nums_1920 = [0, 2, 1, 5, 3, 4]
+print("LC #1920 Input:", nums_1920)
+print("LC #1920 Output:", build_array(nums_1920))
+
+
+# ----------------------------------------------------
+# 4. LeetCode #1299 - Replace Elements with Greatest Element on Right Side
+# ----------------------------------------------------
+"""
+Problem:
+Given an array arr, replace every element with the greatest element among the elements to its right,
+and replace the last element with -1.
+
+Example:
+Input: arr = [17,18,5,4,6,1]
+Output: [18,6,6,6,1,-1]
+"""
+
+def replace_elements(arr):
+    max_right = -1
+    for i in range(len(arr) - 1, -1, -1):
+        new_val = max_right
+        if arr[i] > max_right:
+            max_right = arr[i]
+        arr[i] = new_val
+    return arr
+
+arr_1299 = [17, 18, 5, 4, 6, 1]
+print("LC #1299 Input:", [17, 18, 5, 4, 6, 1])
+print("LC #1299 Output:", replace_elements(arr_1299))
+
+
+# ----------------------------------------------------
+# Time Complexity Summary:
+# ----------------------------------------------------
+# Reverse array               O(n)
+# Find max/min                O(n)
+# LC #1920                    O(n)
+# LC #1299                    O(n)
+# ----------------------------------------------------
+
+
