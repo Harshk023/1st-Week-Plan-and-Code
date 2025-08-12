@@ -235,3 +235,128 @@ print("LC #1299 Output:", replace_elements(arr_1299))
 # ----------------------------------------------------
 
 
+"""
+Day 4: Prefix Sum Problems
+Author: [Your Name]
+Date: [Today's Date]
+
+Topics Covered:
+1. Understanding Prefix Sum
+2. LeetCode #303 - Range Sum Query: Immutable
+3. LeetCode #238 - Product of Array Except Self
+"""
+
+# ----------------------------------------------------
+# 1. Understanding Prefix Sum
+# ----------------------------------------------------
+# Prefix sum is a technique where we precompute the sum of elements
+# up to each index so that we can answer range sum queries quickly.
+
+def prefix_sum_array(nums):
+    prefix = [0] * (len(nums) + 1)  # Extra space for sum[0] = 0
+    for i in range(len(nums)):
+        prefix[i + 1] = prefix[i] + nums[i]
+    return prefix
+
+arr = [2, 4, 6, 8]
+print("Array:", arr)
+print("Prefix Sum:", prefix_sum_array(arr))
+# prefix[i] = sum of arr[0] to arr[i-1]
+
+
+# ----------------------------------------------------
+# 2. LeetCode #303 - Range Sum Query: Immutable
+# ----------------------------------------------------
+"""
+Problem:
+Given an integer array nums, handle multiple queries of the form:
+sumRange(i, j) = sum of nums between indices i and j (inclusive).
+
+Example:
+Input: nums = [-2, 0, 3, -5, 2, -1]
+Queries: sumRange(0, 2) -> 1
+         sumRange(2, 5) -> -1
+         sumRange(0, 5) -> -3
+
+Approach:
+1. Precompute prefix sums.
+2. Answer each query in O(1) time.
+
+Time Complexity:
+- Precomputation: O(n)
+- Query: O(1)
+"""
+
+class NumArray:
+    def __init__(self, nums):
+        self.prefix = [0] * (len(nums) + 1)
+        for i in range(len(nums)):
+            self.prefix[i + 1] = self.prefix[i] + nums[i]
+
+    def sumRange(self, left, right):
+        return self.prefix[right + 1] - self.prefix[left]
+
+# Example usage:
+nums_303 = [-2, 0, 3, -5, 2, -1]
+obj = NumArray(nums_303)
+print("LC #303 sumRange(0,2):", obj.sumRange(0, 2))  # 1
+print("LC #303 sumRange(2,5):", obj.sumRange(2, 5))  # -1
+print("LC #303 sumRange(0,5):", obj.sumRange(0, 5))  # -3
+
+
+# ----------------------------------------------------
+# 3. LeetCode #238 - Product of Array Except Self
+# ----------------------------------------------------
+"""
+Problem:
+Given an array nums, return an array answer such that:
+answer[i] = product of all nums except nums[i].
+
+Example:
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+
+Constraints:
+- O(n) time
+- Without using division
+
+Approach:
+1. Compute prefix products.
+2. Compute suffix products.
+3. Multiply prefix[i] * suffix[i] for each index.
+
+Time Complexity: O(n)
+Space Complexity: O(1) extra (excluding output)
+"""
+
+def productExceptSelf(nums):
+    n = len(nums)
+    answer = [1] * n
+
+    # Prefix product
+    prefix = 1
+    for i in range(n):
+        answer[i] = prefix
+        prefix *= nums[i]
+
+    # Suffix product
+    suffix = 1
+    for i in range(n - 1, -1, -1):
+        answer[i] *= suffix
+        suffix *= nums[i]
+
+    return answer
+
+nums_238 = [1, 2, 3, 4]
+print("LC #238 Input:", nums_238)
+print("LC #238 Output:", productExceptSelf(nums_238))
+
+
+# ----------------------------------------------------
+# Time Complexity Summary:
+# ----------------------------------------------------
+# Prefix sum computation        O(n)
+# LC #303 Preprocessing         O(n), Query O(1)
+# LC #238 Product except self   O(n)
+# ----------------------------------------------------
+
