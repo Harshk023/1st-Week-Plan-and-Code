@@ -360,3 +360,100 @@ print("LC #238 Output:", productExceptSelf(nums_238))
 # LC #238 Product except self   O(n)
 # ----------------------------------------------------
 
+"""
+Day 5: String Basics, Reversing, Palindrome Check
+Author: [Your Name]
+Date: [Today's Date]
+
+Topics Covered:
+1. String basics in Python
+2. Reverse a string
+3. Palindrome check
+4. LeetCode #344 - Reverse String
+5. LeetCode #125 - Valid Palindrome
+"""
+
+# ----------------------------------------------------
+# 1. String Basics in Python
+# ----------------------------------------------------
+# Strings are immutable in Python (cannot be changed in place).
+# Common operations: slicing, concatenation, iteration.
+
+sample_str = "Hello"
+print("String:", sample_str)
+print("First char:", sample_str[0])
+print("Length:", len(sample_str))
+print("Substring (1:4):", sample_str[1:4])
+
+# ----------------------------------------------------
+# 2. Reverse a String (O(n))
+# ----------------------------------------------------
+def reverse_string(s):
+    return s[::-1]  # Python slicing trick
+
+str1 = "Python"
+print("Original:", str1)
+print("Reversed:", reverse_string(str1))
+
+# ----------------------------------------------------
+# 3. Palindrome Check (O(n))
+# ----------------------------------------------------
+# A palindrome is a string that reads the same forward and backward.
+def is_palindrome(s):
+    return s == s[::-1]
+
+print("Is 'madam' palindrome?", is_palindrome("madam"))
+print("Is 'hello' palindrome?", is_palindrome("hello"))
+
+# ----------------------------------------------------
+# 4. LeetCode #344 - Reverse String
+# ----------------------------------------------------
+"""
+Problem:
+Write a function that reverses a string. The input string is given as a list of characters s.
+Modify s in-place with O(1) extra memory.
+
+Example:
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+"""
+
+def reverseString(s):
+    left, right = 0, len(s) - 1
+    while left < right:
+        s[left], s[right] = s[right], s[left]
+        left += 1
+        right -= 1
+
+chars_344 = ["h", "e", "l", "l", "o"]
+reverseString(chars_344)
+print("LC #344 Output:", chars_344)
+
+# ----------------------------------------------------
+# 5. LeetCode #125 - Valid Palindrome
+# ----------------------------------------------------
+"""
+Problem:
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters
+and removing all non-alphanumeric characters, it reads the same forward and backward.
+
+Example:
+Input: "A man, a plan, a canal: Panama"
+Output: true
+"""
+
+def isPalindrome(s):
+    filtered = [ch.lower() for ch in s if ch.isalnum()]
+    return filtered == filtered[::-1]
+
+print("LC #125:", isPalindrome("A man, a plan, a canal: Panama"))  # True
+print("LC #125:", isPalindrome("race a car"))  # False
+
+# ----------------------------------------------------
+# Time Complexity Summary:
+# ----------------------------------------------------
+# Reverse string slicing         O(n)
+# Palindrome check                O(n)
+# LC #344                         O(n)
+# LC #125                         O(n)
+# ----------------------------------------------------
