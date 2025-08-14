@@ -457,3 +457,130 @@ print("LC #125:", isPalindrome("race a car"))  # False
 # LC #344                         O(n)
 # LC #125                         O(n)
 # ----------------------------------------------------
+
+
+"""
+Day 6: Two Pointers Pattern
+Author: [Your Name]
+Date: [Today's Date]
+
+Topics Covered:
+1. Understanding the Two Pointers Pattern
+2. LeetCode #167 - Two Sum II: Input Array Is Sorted
+3. LeetCode #977 - Squares of a Sorted Array
+"""
+
+# ----------------------------------------------------
+# 1. Understanding the Two Pointers Pattern
+# ----------------------------------------------------
+"""
+The Two Pointers pattern uses two indices (pointers) that move
+towards each other (or in the same direction) to solve problems
+in O(n) time instead of O(n^2).
+
+Common use cases:
+- Sorted arrays problems
+- Reverse operations
+- Pair sum search
+"""
+
+# Example: Simple reverse array using two pointers
+def reverse_array(arr):
+    left, right = 0, len(arr) - 1
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+        right -= 1
+    return arr
+
+print("Reverse using two pointers:", reverse_array([1, 2, 3, 4]))
+
+
+# ----------------------------------------------------
+# 2. LeetCode #167 - Two Sum II: Input Array Is Sorted
+# ----------------------------------------------------
+"""
+Problem:
+Given a 1-indexed sorted array of integers numbers, find two numbers
+such that they add up to a target number.
+
+Return the indices of the two numbers as an array [index1, index2]
+where 1 <= index1 < index2 <= numbers.length.
+
+Example:
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+
+Approach:
+- Start with two pointers: left = 0, right = len(numbers) - 1
+- Move pointers based on sum comparison with target.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+
+def twoSum(numbers, target):
+    left, right = 0, len(numbers) - 1
+    while left < right:
+        current_sum = numbers[left] + numbers[right]
+        if current_sum == target:
+            return [left + 1, right + 1]  # 1-indexed
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+    return []
+
+nums_167 = [2, 7, 11, 15]
+target_167 = 9
+print("LC #167 Output:", twoSum(nums_167, target_167))
+
+
+# ----------------------------------------------------
+# 3. LeetCode #977 - Squares of a Sorted Array
+# ----------------------------------------------------
+"""
+Problem:
+Given an integer array nums sorted in non-decreasing order,
+return an array of the squares of each number sorted in non-decreasing order.
+
+Example:
+Input: nums = [-4,-1,0,3,10]
+Output: [0,1,9,16,100]
+
+Approach:
+- Use two pointers from both ends to pick the largest absolute value first.
+- Fill output array from end to start.
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+"""
+
+def sortedSquares(nums):
+    n = len(nums)
+    result = [0] * n
+    left, right = 0, n - 1
+    pos = n - 1  # Fill from the last index
+
+    while left <= right:
+        if abs(nums[left]) > abs(nums[right]):
+            result[pos] = nums[left] ** 2
+            left += 1
+        else:
+            result[pos] = nums[right] ** 2
+            right -= 1
+        pos -= 1
+
+    return result
+
+nums_977 = [-4, -1, 0, 3, 10]
+print("LC #977 Output:", sortedSquares(nums_977))
+
+
+# ----------------------------------------------------
+# Time Complexity Summary:
+# ----------------------------------------------------
+# Reverse array using two pointers      O(n)
+# LC #167                               O(n)
+# LC #977                               O(n)
+# ----------------------------------------------------
