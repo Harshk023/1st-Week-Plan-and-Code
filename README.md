@@ -584,3 +584,169 @@ print("LC #977 Output:", sortedSquares(nums_977))
 # LC #167                               O(n)
 # LC #977                               O(n)
 # ----------------------------------------------------
+
+"""
+Day 7: Practice – Mixed Easy Array/String Problems
+Author: [Your Name]
+Date: [Today's Date]
+
+Topics Covered:
+- Array & String practice problems (easy level)
+"""
+
+# ----------------------------------------------------
+# 1. Find the Largest Number in an Array
+# ----------------------------------------------------
+"""
+Problem:
+Given an array of integers, return the maximum number.
+
+Example:
+Input: [3, 7, 2, 9, 5]
+Output: 9
+"""
+
+def find_max(arr):
+    max_val = arr[0]
+    for num in arr:
+        if num > max_val:
+            max_val = num
+    return max_val
+
+print("Max in [3,7,2,9,5]:", find_max([3, 7, 2, 9, 5]))
+
+
+# ----------------------------------------------------
+# 2. Reverse a String
+# ----------------------------------------------------
+"""
+Problem:
+Given a string, return it reversed.
+
+Example:
+Input: "hello"
+Output: "olleh"
+"""
+
+def reverse_string(s):
+    return s[::-1]
+
+print("Reverse of 'hello':", reverse_string("hello"))
+
+
+# ----------------------------------------------------
+# 3. Check if a String is Palindrome
+# ----------------------------------------------------
+"""
+Problem:
+Return True if string reads same forwards and backwards.
+
+Example:
+Input: "madam" -> True
+Input: "world" -> False
+"""
+
+def is_palindrome(s):
+    return s == s[::-1]
+
+print("Is 'madam' palindrome?", is_palindrome("madam"))
+print("Is 'world' palindrome?", is_palindrome("world"))
+
+
+# ----------------------------------------------------
+# 4. Find First Unique Character in a String (LC #387)
+# ----------------------------------------------------
+"""
+Problem:
+Given a string, find the index of the first non-repeating character.
+If none exists, return -1.
+
+Example:
+Input: "leetcode" -> 0
+Input: "aabb" -> -1
+"""
+
+def firstUniqChar(s):
+    freq = {}
+    for ch in s:
+        freq[ch] = freq.get(ch, 0) + 1
+    for i, ch in enumerate(s):
+        if freq[ch] == 1:
+            return i
+    return -1
+
+print("First unique char in 'leetcode':", firstUniqChar("leetcode"))
+print("First unique char in 'aabb':", firstUniqChar("aabb"))
+
+
+# ----------------------------------------------------
+# 5. Merge Two Sorted Arrays (LC #88)
+# ----------------------------------------------------
+"""
+Problem:
+You are given two sorted arrays nums1 and nums2.
+Merge nums2 into nums1 as one sorted array.
+
+Example:
+nums1 = [1,2,3,0,0,0], nums2 = [2,5,6]
+Output: [1,2,2,3,5,6]
+"""
+
+def merge(nums1, m, nums2, n):
+    i, j, k = m - 1, n - 1, m + n - 1
+    while i >= 0 and j >= 0:
+        if nums1[i] > nums2[j]:
+            nums1[k] = nums1[i]
+            i -= 1
+        else:
+            nums1[k] = nums2[j]
+            j -= 1
+        k -= 1
+    while j >= 0:
+        nums1[k] = nums2[j]
+        j -= 1
+        k -= 1
+    return nums1
+
+print("Merged array:", merge([1,2,3,0,0,0], 3, [2,5,6], 3))
+
+
+# ----------------------------------------------------
+# 6. Remove Duplicates from Sorted Array (LC #26)
+# ----------------------------------------------------
+"""
+Problem:
+Given a sorted array, remove the duplicates in-place such that
+each element appears only once.
+
+Example:
+Input: [1,1,2]
+Output: [1,2]
+"""
+
+def removeDuplicates(nums):
+    if not nums:
+        return 0
+    i = 0
+    for j in range(1, len(nums)):
+        if nums[j] != nums[i]:
+            i += 1
+            nums[i] = nums[j]
+    return i + 1
+
+arr = [1,1,2,2,3]
+k = removeDuplicates(arr)
+print("After removing duplicates:", arr[:k])
+
+
+# ----------------------------------------------------
+# Time Complexity Summary:
+# ----------------------------------------------------
+# Find max in array                     O(n)
+# Reverse string                        O(n)
+# Palindrome check                      O(n)
+# First unique char in string (#387)    O(n)
+# Merge sorted arrays (#88)             O(m+n)
+# Remove duplicates from sorted (#26)   O(n)
+# ----------------------------------------------------
+
